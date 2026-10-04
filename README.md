@@ -1,65 +1,92 @@
 # Aura XLSL
 
-**XLSL — Intelligent Spreadsheet Language** is a research-workbook architecture for combining structured data, STEM computation, simulation, statistics, AI-assisted interpretation, provenance, and multidimensional models.
+**XLSL — Intelligent Spreadsheet Language** is Aura's semantic workbook architecture for structured data, STEM computation, simulation, statistics, AI-assisted interpretation, provenance, and multidimensional models.
+
+Inventor / project attribution: **Seriki Yakub (KUBU LEE)**.
 
 ## Repository
 
+```
 Xlsl/
-- README.md
-- CMakeLists.txt
-- engine/include/auraxlsl/survival/log_rank.hpp
-- tests/log_rank_test.cpp
-- docs/specification.md
-- docs/statistics/log-rank.md
-- docs/statistics/survival-analysis.md
-- extensions/xlog_spec.md
-- extensions/xsim_spec.md
-- extensions/xquant_spec.md
-- extensions/xdim_spec.md
-- extensions/xphilo_spec.md
-- simulations/teleportation_pipeline.md
+├── workbook/
+│   ├── Aura.xlsl
+│   └── Braneworld.xlsl
+├── src/
+│   └── xlsl_runtime.py
+├── engine/
+│   └── include/auraxlsl/survival/log_rank.hpp
+├── tests/
+│   ├── test_xlsl_runtime.py
+│   └── log_rank_test.cpp
+├── docs/
+│   ├── architecture.md
+│   ├── xlsl-format.md
+│   ├── research-methodology.md
+│   └── attribution.md
+├── extensions/
+│   ├── xlog_spec.md
+│   ├── xsim_spec.md
+│   ├── xquant_spec.md
+│   ├── xdim_spec.md
+│   └── xphilo_spec.md
+└── simulations/
+    └── teleportation_pipeline.md
+```
 
-## Core concept
+## Core model
 
-The semantic workbook is Aura. XLSL treats a spreadsheet as more than a rectangular grid: sheets can represent datasets, formulas, simulations, models, assumptions, provenance, and research results.
+The semantic workbook is Aura. XLSL treats a workbook as a graph of typed sheets and research artifacts rather than only a rectangular grid.
 
-The .xlsl layer can use .xlsx as an interchange format while preserving richer semantic metadata through XLSL extensions.
+The canonical `.xlsl` representation is UTF-8 JSON in v0.1. XLSX remains an interoperability format; semantic metadata such as provenance, dimensions, hypotheses, and simulation records must not be silently discarded during projection.
 
-## Research modules
+## Aura research workbooks
 
-- Pure Mathematics
-- Further Mathematics
-- Applied Physics
-- Reasoning Logic
-- Simulation Problems
-- Statistical analysis
-- AI interpretation and prediction
-- Multidimensional research data
+- **Aura.xlsl** — top-level research orchestrator.
+- **Braneworld.xlsl** — theoretical physics research model.
+- Cortex, Memory, Vision, and Synapse are reserved for the wider Aura intelligence/LMKM workbook family.
 
-## Statistical engine
+## Runtime
 
-The repository now contains a C++17 reference implementation of a two-sample log-rank test with explicit input validation, deterministic time ordering, tied-event handling, expected-event and hypergeometric variance calculation, chi-square, signed Z, two-sided p-value, and zero-variance handling.
+The Python reference runtime provides deterministic loading and structural validation:
 
-Build and test:
+```bash
+python -m pytest
+```
 
+The C++ statistical engine remains independently buildable:
+
+```bash
 cmake -S . -B build
-cmake --build build
+cmake --build build --parallel
 ctest --test-dir build --output-on-failure
+```
 
-The statistical implementation should be independently checked against R's survival package before being treated as a production statistical library.
+The two-sample log-rank implementation includes input validation, deterministic ordering, tied-event handling, expected events, hypergeometric variance, chi-square, signed Z, two-sided p-value, and zero-variance handling. It should be independently checked against a trusted statistical reference before production use.
 
-## Teleportation research
+## Research extensions
 
-The teleportation pipeline is a conceptual simulation/research model. TP-001 through TP-006 describe progressively more speculative scenarios. TP-006 human teleportation is explicitly a theoretical/infeasible model, not an engineering claim or experimental procedure.
+- `.xlog` — experimental/provenance logs
+- `.xsim` — simulation definitions and reproducibility metadata
+- `.xquant` — quantitative/quantum-oriented state descriptions
+- `.xdim` — multidimensional data and coordinate metadata
+- `.xphilo` — assumptions, hypotheses, evidence, and research reasoning
 
-## Extensions
+## Epistemic policy
 
-- .xlog — provenance/event logs
-- .xsim — simulation definitions
-- .xquant — quantitative/quantum state descriptions
-- .xdim — multidimensional data
-- .xphilo — assumptions, hypotheses, evidence, and research reasoning
+Aura XLSL explicitly separates observed data, deterministic derivations, simulations, hypotheses, and reference facts.
 
-## Status
+The teleportation pipeline is a conceptual research model. TP-001 through TP-006 are progressively speculative states; TP-006 human-scale teleportation is theoretical and currently infeasible. A simulation result is never automatically interpreted as proof of physical feasibility.
 
-This repository is being rebuilt incrementally from the Aura research specification. The executable core is intentionally small first: establish deterministic, testable primitives before expanding the workbook runtime.
+## Direction
+
+The next runtime layers are:
+
+1. workbook graph resolution;
+2. formula evaluation;
+3. extension validators;
+4. deterministic simulation records;
+5. XLSX projection/import;
+6. LMKM context and interpretation interfaces;
+7. Web4 attribution and reproducibility records.
+
+This repository is the foundation for the broader Aura Ecosystem: **XLSL · LMKM · Web4 · AI · Blockchain**.
