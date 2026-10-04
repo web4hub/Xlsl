@@ -1,0 +1,1 @@
+bash -lc ls -lh /mnt/data && file /mnt/data/Xlslpaper-main.zip /mnt/data/Xlsl.pgsql /mnt/data/Aura_Hub.xlsl /mnt/data/workbook.xlsl /mnt/data/setup_aura_xlsl.pypl && unzip -l /mnt/data/Xlslpaper-main.zip | head -80
