@@ -24,6 +24,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install test dependencies
-        run: python -m pip install --upgrade pytest
+        run: python -m pip install --upgrade pip && python -m pip install -e ".[test]"
       - name: Validate XLSL workbooks
         run: python -m pytest -q
