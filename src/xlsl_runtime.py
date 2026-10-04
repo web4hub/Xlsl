@@ -41,6 +41,8 @@ def validate_workbook(data: dict[str, Any]) -> None:
     if not isinstance(data["metadata"], dict):
         raise XlslValidationError("metadata must be an object")
 
+    _validate_agency_extension(data.get("extensions"))
+
     sheets = data["sheets"]
     if not isinstance(sheets, list):
         raise XlslValidationError("sheets must be an array")
@@ -82,6 +84,44 @@ def _validate_sheet(sheet: Any, seen: set[str]) -> None:
             raise XlslValidationError(
                 f"row {index} in {sid} has unknown columns: {sorted(unknown)}"
             )
+
+
+def _validate_agency_extension(extensions: Any) -> None:
+    """Validate optional human/model decision-boundary provenance."""
+    if extensions is None or "agency" not in extensions:
+        return
+    agency = extensions["agency"]
+    if not isinstance(agency, dict):
+        raise XlslValidationError("agency extension must be an object")
+    records = agency.get("records", [])
+    if not isinstance(records, list):
+        raise XlslValidationError("agency records must be an array")
+    allowed = {"intent_owner", "decision_owner", "execution_owner", "verification_owner"}
+    owners = {"human", "model", "shared", "automated"}
+    for index, record in enumerate(records, start=1):
+        if not isinstance(record, dict):
+            raise XlslValidationError(f"agency record {index} must be an object")
+        unknown = set(record) - (allowed | {"operation", "evidence"})
+        if unknown:
+            raise XlslValidationError(f"agency record {index} has unknown fields: {sorted(unknown)}")
+        if not record.get("operation"):
+            raise XlslValidationError(f"agency record {index} needs operation")
+        for field in allowed:
+            if field in record and record[field] not in owners:
+                raise XlslValidationError(f"agency record {index} has invalid {field}: {record[field]!r}")
+
+
+def agency_summary(data: dict[str, Any]) -> dict[str, int]:
+    """Return deterministic counts of ownership decisions in an XLSL workbook."""
+    validate_workbook(data)
+    records = ((data.get("extensions") or {}).get("agency") or {}).get("records", [])
+    counts = {"human": 0, "model": 0, "shared": 0, "automated": 0}
+    for record in records:
+        for field in ("intent_owner", "decision_owner", "execution_owner", "verification_owner"):
+            owner = record.get(field)
+            if owner in counts:
+                counts[owner] += 1
+    return counts
 
 
 def workbook_summary(data: dict[str, Any]) -> dict[str, Any]:

@@ -5,7 +5,14 @@
   "metadata": {
     "title": "Aura Research",
     "inventor": "Seriki Yakub (KUBU LEE)",
-    "domain": ["AI", "STEM", "physics", "simulation", "statistics", "Web4"],
+    "domain": [
+      "AI",
+      "STEM",
+      "physics",
+      "simulation",
+      "statistics",
+      "Web4"
+    ],
     "semantic_role": "research-orchestrator"
   },
   "sheets": [
@@ -13,30 +20,119 @@
       "id": "research",
       "name": "Research",
       "kind": "research",
-      "columns": ["id", "type", "title", "status"],
+      "columns": [
+        "id",
+        "type",
+        "title",
+        "status"
+      ],
       "rows": [
-        {"id": "R-001", "type": "hypothesis", "title": "XLSL as a semantic research workbook", "status": "active"},
-        {"id": "R-002", "type": "model", "title": "Aura research graph", "status": "active"}
+        {
+          "id": "R-001",
+          "type": "hypothesis",
+          "title": "XLSL as a semantic research workbook",
+          "status": "active"
+        },
+        {
+          "id": "R-002",
+          "type": "model",
+          "title": "Aura research graph",
+          "status": "active"
+        }
       ]
     },
     {
       "id": "modules",
       "name": "STEM",
       "kind": "module_registry",
-      "columns": ["id", "module", "workbook"],
+      "columns": [
+        "id",
+        "module",
+        "workbook"
+      ],
       "rows": [
-        {"id": "M-001", "module": "Mathematics", "workbook": "Aura.xlsl"},
-        {"id": "M-002", "module": "Physics", "workbook": "Braneworld.xlsl"},
-        {"id": "M-003", "module": "Statistics", "workbook": "Aura.xlsl"},
-        {"id": "M-004", "module": "AI/LMKM", "workbook": "Cortex.xlsl"}
+        {
+          "id": "M-001",
+          "module": "Mathematics",
+          "workbook": "Aura.xlsl"
+        },
+        {
+          "id": "M-002",
+          "module": "Physics",
+          "workbook": "Braneworld.xlsl"
+        },
+        {
+          "id": "M-003",
+          "module": "Statistics",
+          "workbook": "Aura.xlsl"
+        },
+        {
+          "id": "M-004",
+          "module": "AI/LMKM",
+          "workbook": "Cortex.xlsl"
+        }
       ]
     }
   ],
   "extensions": {
-    "xlog": {"enabled": true},
-    "xsim": {"enabled": true},
-    "xquant": {"enabled": true},
-    "xdim": {"enabled": true},
-    "xphilo": {"enabled": true}
+    "xlog": {
+      "enabled": true
+    },
+    "xsim": {
+      "enabled": true
+    },
+    "xquant": {
+      "enabled": true
+    },
+    "xdim": {
+      "enabled": true
+    },
+    "xphilo": {
+      "enabled": true
+    },
+    "agency": {
+      "schema": "aura.agency/v1",
+      "purpose": "Measure and preserve the human/model division of labor.",
+      "owners": [
+        "human",
+        "model",
+        "shared",
+        "automated"
+      ],
+      "records": [
+        {
+          "operation": "research-specification",
+          "intent_owner": "human",
+          "decision_owner": "human",
+          "execution_owner": "shared",
+          "verification_owner": "human",
+          "evidence": "research specification"
+        },
+        {
+          "operation": "xlsl-validation",
+          "intent_owner": "human",
+          "decision_owner": "shared",
+          "execution_owner": "automated",
+          "verification_owner": "automated",
+          "evidence": "runtime tests"
+        },
+        {
+          "operation": "lmlm-interpretation",
+          "intent_owner": "human",
+          "decision_owner": "model",
+          "execution_owner": "model",
+          "verification_owner": "shared",
+          "evidence": "lmlm result + provenance"
+        },
+        {
+          "operation": "hypothesis-promotion",
+          "intent_owner": "human",
+          "decision_owner": "human",
+          "execution_owner": "automated",
+          "verification_owner": "human",
+          "evidence": "explicit epistemic gate"
+        }
+      ]
+    }
   }
 }

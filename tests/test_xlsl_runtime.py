@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from src.xlsl_runtime import XlslValidationError, load_workbook, validate_workbook, workbook_summary
+from src.xlsl_runtime import XlslValidationError, agency_summary, load_workbook, validate_workbook, workbook_summary
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,5 +38,21 @@ def test_duplicate_sheet_ids_rejected():
 def test_unknown_row_column_rejected():
     data = load_workbook(ROOT / "workbook" / "Aura.xlsl")
     data["sheets"][0]["rows"][0]["not_a_column"] = True
+    with pytest.raises(XlslValidationError):
+        validate_workbook(data)
+
+
+def test_agency_summary_is_deterministic():
+    data = load_workbook(ROOT / "workbook" / "Aura.xlsl")
+    summary = agency_summary(data)
+    assert summary["human"] == 8
+    assert summary["model"] == 2
+    assert summary["shared"] == 3
+    assert summary["automated"] == 3
+
+
+def test_invalid_agency_owner_rejected():
+    data = load_workbook(ROOT / "workbook" / "Aura.xlsl")
+    data["extensions"]["agency"]["records"][0]["decision_owner"] = "unknown"
     with pytest.raises(XlslValidationError):
         validate_workbook(data)
