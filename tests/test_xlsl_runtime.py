@@ -41,13 +41,14 @@ def test_unknown_row_column_rejected():
     with pytest.raises(XlslValidationError):
         validate_workbook(data)
 
+
 def test_agency_summary_is_deterministic():
     data = load_workbook(ROOT / "workbook" / "Aura.xlsl")
     summary = agency_summary(data)
-    assert summary["human"] == 6
+    assert summary["human"] == 8
     assert summary["model"] == 2
-    assert summary["shared"] == 2
-    assert summary["automated"] == 2
+    assert summary["shared"] == 3
+    assert summary["automated"] == 3
 
 
 def test_invalid_agency_owner_rejected():
