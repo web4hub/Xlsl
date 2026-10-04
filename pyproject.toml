@@ -11,7 +11,7 @@ dependencies = ["SQLAlchemy>=2.0"]
 
 
 [project.optional-dependencies]
-test = ["pytest>=8"]
+test = ["pytest>=8", "SQLAlchemy>=2.0"]
 excel = ["pywin32>=306"]
 
 [tool.pytest.ini_options]
