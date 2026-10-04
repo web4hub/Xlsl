@@ -5,12 +5,16 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "aura-xlsl"
 version = "0.1.0"
-description = "Aura XLSL semantic workbook reference runtime"
+description = "Aura XLSL semantic workbook reference runtime with LMLM integration"
 requires-python = ">=3.10"
 dependencies = []
 
 [project.optional-dependencies]
 test = ["pytest>=8"]
+excel = ["pywin32>=306"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["src*", "lmlm*"]
