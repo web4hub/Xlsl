@@ -1,0 +1,60 @@
+{
+  "format": "XLSL",
+  "version": "0.1.0",
+  "workbook": "aura.braneworld",
+  "metadata": {
+    "title": "Aura Braneworld Research Model",
+    "inventor": "Seriki Yakub (KUBU LEE)",
+    "status": "theoretical-research",
+    "epistemic_policy": "simulation-is-not-proof"
+  },
+  "sheets": [
+    {
+      "id": "parameters",
+      "name": "Parameters",
+      "kind": "parameter_space",
+      "columns": ["id", "symbol", "value", "unit", "role"],
+      "rows": [
+        {"id": "P-001", "symbol": "k", "value": 1.0, "unit": "dimensionless", "role": "curvature-scale placeholder"},
+        {"id": "P-002", "symbol": "L", "value": 1.0, "unit": "normalized", "role": "extra-dimension scale placeholder"},
+        {"id": "P-003", "symbol": "rho", "value": 1.0, "unit": "normalized", "role": "brane energy-density placeholder"}
+      ]
+    },
+    {
+      "id": "hypotheses",
+      "name": "Hypotheses",
+      "kind": "hypothesis_registry",
+      "columns": ["id", "statement", "status"],
+      "rows": [
+        {"id": "H-001", "statement": "Observable dynamics can be represented as a projection of a higher-dimensional model.", "status": "hypothesis"},
+        {"id": "H-002", "statement": "Parameter sensitivity can identify regimes worth further mathematical study.", "status": "hypothesis"}
+      ]
+    },
+    {
+      "id": "simulation",
+      "name": "Simulation",
+      "kind": "simulation",
+      "columns": ["id", "input", "output", "status"],
+      "rows": [
+        {"id": "SIM-001", "input": "parameter sweep", "output": "sensitivity metrics", "status": "planned"}
+      ]
+    },
+    {
+      "id": "provenance",
+      "name": "Provenance",
+      "kind": "provenance",
+      "columns": ["field", "value"],
+      "rows": [
+        {"field": "model_class", "value": "theoretical"},
+        {"field": "physical_claim", "value": "none"},
+        {"field": "reproducibility", "value": "record parameters, seed, code revision and environment"}
+      ]
+    }
+  ],
+  "extensions": {
+    "xdim": {"dimensions": ["x", "y", "z", "extra"]},
+    "xquant": {"backend": "none", "status": "representation-only"},
+    "xphilo": {"evidence_policy": "hypotheses remain hypotheses"},
+    "xsim": {"seed_required": true}
+  }
+}

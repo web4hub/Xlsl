@@ -1,0 +1,11 @@
+{
+  "schema": "aura.lmlm.models/v1",
+  "provider": "lmlm",
+  "description": "Logical LMLM model profiles used by Aura XLSL. Model IDs are deployment aliases.",
+  "models": [
+    {"id":"lmlm-default","role":"general","modalities":["text","structured"],"tasks":["research","reasoning","workbook-orchestration"]},
+    {"id":"lmlm-reasoner","role":"reasoning","modalities":["text","structured"],"tasks":["hypothesis-analysis","model-review","derivation-review"]},
+    {"id":"lmlm-code","role":"code","modalities":["text","structured"],"tasks":["python","cpp","xlsl-runtime","ci"]},
+    {"id":"lmlm-vision","role":"multimodal","modalities":["text","image","structured"],"tasks":["figure-interpretation","visualization-review","multimodal-research"]}
+  ]
+}

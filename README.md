@@ -1,65 +1,45 @@
 # Aura XLSL
 
-**XLSL — Intelligent Spreadsheet Language** is a research-workbook architecture for combining structured data, STEM computation, simulation, statistics, AI-assisted interpretation, provenance, and multidimensional models.
+XLSL — Intelligent Spreadsheet Language is Aura's semantic workbook architecture for structured data, STEM computation, simulation, statistics, AI-assisted interpretation, provenance, and multidimensional models.
 
-## Repository
+Inventor / project attribution: Seriki Yakub (KUBU LEE).
 
-Xlsl/
-- README.md
-- CMakeLists.txt
-- engine/include/auraxlsl/survival/log_rank.hpp
-- tests/log_rank_test.cpp
-- docs/specification.md
-- docs/statistics/log-rank.md
-- docs/statistics/survival-analysis.md
-- extensions/xlog_spec.md
-- extensions/xsim_spec.md
-- extensions/xquant_spec.md
-- extensions/xdim_spec.md
-- extensions/xphilo_spec.md
-- simulations/teleportation_pipeline.md
+## LMLM integration
 
-## Core concept
+LMLM is the intelligence/orchestration layer above deterministic XLSL execution.
 
-The semantic workbook is Aura. XLSL treats a spreadsheet as more than a rectangular grid: sheets can represent datasets, formulas, simulations, models, assumptions, provenance, and research results.
+Model profiles in lmlm/models.json: lmlm-default, lmlm-reasoner, lmlm-code, and lmlm-vision. These are deployment aliases, not claims that a specific hosted model exists.
 
-The .xlsl layer can use .xlsx as an interchange format while preserving richer semantic metadata through XLSL extensions.
+lmlm/provider.py exposes an OpenAI-compatible Responses adapter. Configure LMLM_BASE_URL and optionally LMLM_API_KEY.
 
-## Research modules
+LMLM can interpret, summarize, propose, classify, and orchestrate, but it must not silently promote a simulation or hypothesis into an observed fact.
 
-- Pure Mathematics
-- Further Mathematics
-- Applied Physics
-- Reasoning Logic
-- Simulation Problems
-- Statistical analysis
-- AI interpretation and prediction
-- Multidimensional research data
+## Optional Excel projection
 
-## Statistical engine
+tools/build_aura_xlsm.py creates Aura.xlsm from the checked-in vba/AuraHub.bas. It requires Windows, Microsoft Excel, pywin32, and Excel Trust Center permission for VBA project access.
 
-The repository now contains a C++17 reference implementation of a two-sample log-rank test with explicit input validation, deterministic time ordering, tied-event handling, expected-event and hypergeometric variance calculation, chi-square, signed Z, two-sided p-value, and zero-variance handling.
+The generated XLSM is an execution/UI projection; workbook/Aura.xlsl remains canonical.
 
-Build and test:
+## Runtime
 
-cmake -S . -B build
-cmake --build build
-ctest --test-dir build --output-on-failure
+Python validation: python -m pytest
 
-The statistical implementation should be independently checked against R's survival package before being treated as a production statistical library.
+C++ validation: cmake -S . -B build; cmake --build build --parallel; ctest --test-dir build --output-on-failure
 
-## Teleportation research
+## Research extensions
 
-The teleportation pipeline is a conceptual simulation/research model. TP-001 through TP-006 describe progressively more speculative scenarios. TP-006 human teleportation is explicitly a theoretical/infeasible model, not an engineering claim or experimental procedure.
+.xlog — experimental/provenance logs
+.xsim — simulation definitions and reproducibility metadata
+.xquant — quantitative/quantum-oriented state descriptions
+.xdim — multidimensional data and coordinate metadata
+.xphilo — assumptions, hypotheses, evidence, and research reasoning
 
-## Extensions
+## Epistemic policy
 
-- .xlog — provenance/event logs
-- .xsim — simulation definitions
-- .xquant — quantitative/quantum state descriptions
-- .xdim — multidimensional data
-- .xphilo — assumptions, hypotheses, evidence, and research reasoning
+Aura XLSL explicitly separates observed data, deterministic derivations, simulations, hypotheses, and reference facts. Simulation is not automatically treated as proof.
 
-## Status
+## Direction
 
-This repository is being rebuilt incrementally from the Aura research specification. The executable core is intentionally small first: establish deterministic, testable primitives before expanding the workbook runtime.
+Next layers: workbook graph resolution, formula evaluation, extension validators, deterministic simulation records, XLSX projection/import, LMKM context and interpretation interfaces, and Web4 attribution/reproducibility.
+
+Aura Ecosystem: XLSL · LMLM · LMKM · Web4 · AI · Blockchain
